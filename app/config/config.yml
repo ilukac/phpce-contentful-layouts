@@ -30,6 +30,8 @@ framework:
     assets: ~
     php_errors:
         log: true
+    templating:
+        engines: ['twig', 'php']
 
 # Twig Configuration
 twig:
@@ -65,3 +67,15 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+contentful:
+    delivery:
+        clients:
+            default:
+                space: tt0p8zsqsjr3
+                token: a2b24690929f123e4477d01a442258dd3e0c432f3cff88e5023471b6663b17f0
+                cache: true
+            products:
+                space: wkt0lnx1895y
+                token: a2e3bc63e696bed2bfaac27f061aa572900428468ceec6bc8aadc1ef1f2722f5
+                cache: true
