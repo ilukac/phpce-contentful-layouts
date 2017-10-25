@@ -41,3 +41,10 @@ services:
             - "@service_container"
             - "@doctrine.orm.entity_manager"
         public: true
+
+    app.routing.contentful_enhancer:
+        class: AppBundle\RoutingEnhancer\ContentfulEnhancer
+        arguments:
+            - "@app.contentful_service"
+        tags:
+            -  { name: dynamic_router_route_enhancer, priority: 10 }
