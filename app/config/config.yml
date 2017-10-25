@@ -79,3 +79,14 @@ contentful:
                 space: ANOTHER_CONTENTFUL_SPACE_ID
                 token: ANOTHER_CONTENTFUL_SPACE_TOKEN
                 cache: true
+
+cmf_routing:
+#    chain:
+#        routers_by_id:
+#            router.default: 200
+#            cmf_routing.dynamic_router: 100
+    dynamic:
+#        default_controller: AppBundle:Contentful:view
+        persistence:
+            orm:
+                enabled: true
