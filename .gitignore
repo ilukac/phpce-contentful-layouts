@@ -15,5 +15,5 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-composer.lock
-.idea/
+/composer.lock
+/.idea/
