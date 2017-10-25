@@ -153,9 +153,9 @@ class Contentful {
 
         $route = new Route();
         $route->setName($id);
-        $url  = "/" . $this->createSlug($contentfulEntry->getSpace()->getName());
-        $url .= "/" . $this->createSlug($contentfulEntry->getName());
-        $route->setStaticPrefix($url);
+        $slug  = "/" . $this->createSlug($contentfulEntry->getSpace()->getName());
+        $slug .= "/" . $this->createSlug($contentfulEntry->getName());
+        $route->setStaticPrefix($slug);
         $route->setDefault(RouteObjectInterface::CONTENT_ID, "AppBundle\Entity\ContentfulEntry:". $id);
         $route->setContent($contentfulEntry);
         $contentfulEntry->addRoute($route); // Create the backlink from content to route
