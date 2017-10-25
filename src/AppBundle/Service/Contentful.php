@@ -59,7 +59,7 @@ class Contentful {
 
     public function getClients() {
         /**
-         * @var \Contentful\Delivery\Client[] $services
+         * @var \Contentful\Delivery\Client[] $clients
          */
         $clients = array();
         foreach ($this->clients_config as $clientName) {
@@ -72,7 +72,7 @@ class Contentful {
     public function getContentType($id) {
         foreach ($this->clients_config as $clientName) {
             /**
-             * @var \Contentful\Delivery\Client $service
+             * @var \Contentful\Delivery\Client $client
              */
             $client = $this->container->get($clientName["service"]);
             foreach ($client->getContentTypes()->getItems() as $contentType)
