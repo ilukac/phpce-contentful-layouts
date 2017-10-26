@@ -247,4 +247,23 @@ class Contentful {
 
         return $contentfulEntries;
     }
+
+    /*
+     ********** Choices for forms ************
+     */
+    
+    public function getClientsAndContentTypesAsChoices() {
+        $clientsAndContentTypes = array();
+        foreach ($this->clients_config as $clientName => $clientDetails) {
+            /**
+             * @var \Contentful\Delivery\Client $service
+             */
+            $client = $this->container->get($clientDetails["service"]);
+            $clientsAndContentTypes[$client->getSpace()->getName()] = $clientName;
+            foreach ($client->getContentTypes()->getItems() as $contentType)
+                $clientsAndContentTypes[">  ". $contentType->getName()] = $clientName."|".$contentType->getId();
+
+        }
+        return $clientsAndContentTypes;
+    }
 }

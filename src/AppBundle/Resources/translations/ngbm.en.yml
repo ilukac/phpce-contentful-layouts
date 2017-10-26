@@ -1,0 +1,7 @@
+query.contentful_search.space: 'Space'
+query.contentful_search.search_text: 'Search term'
+query.contentful_search.sort_type: 'Order by'
+query.contentful_search.sort_direction: 'Order direction'
+query.contentful_search.limit: 'Limit'
+query.contentful_search.offset: 'Offset'
+query.contentful_search.client: 'Space and Content Type'

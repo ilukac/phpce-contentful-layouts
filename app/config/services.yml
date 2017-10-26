@@ -88,3 +88,10 @@ services:
             - "@app.contentful_service"
         tags:
             - { name: netgen_block_manager.item.value_loader, value_type: contentful_entry }
+
+    app.collection.query_type.handler.contentful_search:
+        class: AppBundle\Layouts\Collection\QueryType\Handler\ContentfulHandler
+        arguments:
+            - "@app.contentful_service"
+        tags:
+            - { name: netgen_block_manager.collection.query_type_handler, type: contentful_search }
