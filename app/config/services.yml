@@ -49,6 +49,13 @@ services:
         tags:
             -  { name: dynamic_router_route_enhancer, priority: 10 }
 
+    app.content_browser.backend.contentful_entry:
+        class: AppBundle\ContentBrowser\Backend\ContentfulBackend
+        arguments:
+            - "@app.contentful_service"
+        tags:
+            -  { name: netgen_content_browser.backend, item_type: contentful_entry }
+
     app.block_manager.value_converter.contentful_entry:
         class: AppBundle\Layouts\Item\ValueConverter\ContentfulValueConverter
         public: false

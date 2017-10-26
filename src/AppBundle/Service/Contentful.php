@@ -8,6 +8,7 @@ use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Orm\Route;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use AppBundle\Entity\ContentfulEntry;
 use Contentful\Delivery\EntryInterface;
+use Contentful\Delivery\Query;
 
 
 class Contentful {
@@ -101,6 +102,10 @@ class Contentful {
         return "Contentful service wrapper";
     }
 
+    /*
+     ************** Content Entry part ****************
+     */
+
     public function loadContentfulEntry($id) {
 
         $id_array = explode("|", $id);
@@ -169,5 +174,77 @@ class Contentful {
 
     private function createSlug($string) {
         return strtolower(trim(preg_replace('~[^0-9a-z]+~i', '-', html_entity_decode(preg_replace('~&([a-z]{1,2})(?:acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($string, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8')), '-'));
+    }
+
+    /*
+     ********** Content Entries part ************
+     */
+
+    public function getContentfulEntries($offset = 0, $limit = 25, $client = null, $query = null) {
+
+        if ($client == null) {
+            $client = $this->default_client;
+        }
+
+        if ($query == null) {
+            $query = new Query();
+            $query->setLimit($limit);
+            $query->setSkip($offset);
+        }
+
+        return $this->buildContentfulEntries($client->getEntries($query), $client);
+    }
+
+    public function getContentfulEntriesCount($client = null, $query = null) {
+        if ($client == null) {
+            $client = $this->default_client;
+        }
+
+        if ($query == null) {
+            $query = new Query();
+        }
+
+        return count($client->getEntries($query));
+    }
+
+    public function searchContentfulEntries($searchText, $offset = 0, $limit = 25, $client = null) {
+        if ($client == null) {
+            $client = $this->default_client;
+        }
+
+        $query = new Query();
+        $query->setLimit($limit);
+        $query->setSkip($offset);
+        $query->where('query', $searchText);
+
+        return $this->buildContentfulEntries($client->getEntries($query), $client);
+    }
+
+    public function searchContentfulEntriesCount($searchText, $client = null) {
+        if ($client == null) {
+            $client = $this->default_client;
+        }
+
+        $query = new Query();
+        $query->where('query', $searchText);
+
+        return count($client->getEntries($query));
+    }
+
+    private function buildContentfulEntries($entries, $client) {
+        $contentfulEntries = array();
+
+        foreach ($entries as $remote_entry) {
+            $id = $remote_entry->getSpace()->getId() ."|". $remote_entry->getId();
+            $contentfulEntry = $this->findContentfulEntry($id);
+            if (!$contentfulEntry instanceof ContentfulEntry) {
+                $contentfulEntry = $this->buildContentfulEntry($remote_entry, $id);
+            } else {
+                $contentfulEntry->reviveRemoteEntry($client);
+            }
+            $contentfulEntries[] = $contentfulEntry;
+        }
+
+        return $contentfulEntries;
     }
 }
