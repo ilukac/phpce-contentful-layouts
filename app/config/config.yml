@@ -134,7 +134,16 @@ netgen_block_manager:
                     template: "ngbm/item/contentful_entry.html.twig"
                     match:
                         item\value_type: contentful_entry
-
+        rule_target_view:
+            value:
+                contentful_entry:
+                    template: "ngbm/layout_resolver/target/value/contentful_entry.html.twig"
+                    match:
+                        rule_target\type: contentful_entry
+                contentful_space:
+                    template: "ngbm/layout_resolver/target/value/contentful_space.html.twig"
+                    match:
+                        rule_target\type: contentful_space
     query_types:
         contentful_search:
             name: 'Contentful search'

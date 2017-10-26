@@ -266,4 +266,12 @@ class Contentful {
         }
         return $clientsAndContentTypes;
     }
+
+    public function getSpacesAsChoices() {
+        $spaces = array();
+        foreach ($this->clients_config as $clientName) {
+            $spaces[$this->container->get($clientName["service"])->getSpace()->getName()] = $clientName["space"];
+        }
+        return $spaces;
+    }
 }

@@ -5,3 +5,6 @@ query.contentful_search.sort_direction: 'Order direction'
 query.contentful_search.limit: 'Limit'
 query.contentful_search.offset: 'Offset'
 query.contentful_search.client: 'Space and Content Type'
+
+layout_resolver.target.contentful_entry: 'Contentful Entry'
+layout_resolver.target.contentful_space: 'Contentful Space'

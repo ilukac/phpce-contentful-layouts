@@ -95,3 +95,36 @@ services:
             - "@app.contentful_service"
         tags:
             - { name: netgen_block_manager.collection.query_type_handler, type: contentful_search }
+
+    app.target_type.contentful_entry_target:
+        class: AppBundle\Layouts\Resolver\TargetType\Entry
+        tags:
+            - { name: netgen_block_manager.layout.resolver.target_type }
+
+    app.layout_resolver.form.target_type.mapper.contentful_entry_target:
+        class: AppBundle\Layouts\Resolver\TargetType\FormMapper\Entry
+        tags:
+            - { name: netgen_block_manager.layout.resolver.form.target_type.mapper, target_type: contentful_entry }
+
+    app.layout_resolver.target_handler.doctrine.contentful_entry_target:
+        class: AppBundle\Layouts\Resolver\TargetHandler\Entry
+        tags:
+            - { name: netgen_block_manager.persistence.doctrine.layout_resolver.query_handler.target_handler, target_type: contentful_entry }
+
+    app.target_type.contentful_space_target:
+        class: AppBundle\Layouts\Resolver\TargetType\Space
+        tags:
+            - { name: netgen_block_manager.layout.resolver.target_type }
+
+    app.layout_resolver.form.target_type.mapper.contentful_space_target:
+        class: AppBundle\Layouts\Resolver\TargetType\FormMapper\Space
+        arguments:
+            - "@app.contentful_service"
+        tags:
+            - { name: netgen_block_manager.layout.resolver.form.target_type.mapper, target_type: contentful_space }
+
+    app.layout_resolver.target_handler.doctrine.contentful_space_target:
+        class: AppBundle\Layouts\Resolver\TargetHandler\Space
+        tags:
+            - { name: netgen_block_manager.persistence.doctrine.layout_resolver.query_handler.target_handler, target_type: contentful_space }
+
