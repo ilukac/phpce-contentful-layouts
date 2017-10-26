@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -90,3 +90,6 @@ cmf_routing:
         persistence:
             orm:
                 enabled: true
+
+netgen_block_manager:
+    pagelayout: 'base.html.twig'
