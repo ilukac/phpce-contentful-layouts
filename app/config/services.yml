@@ -56,6 +56,25 @@ services:
         tags:
             -  { name: netgen_content_browser.backend, item_type: contentful_entry }
 
+    app.content_browser.template_value_provider.contentful_entry.created_at:
+        class: AppBundle\ContentBrowser\Item\Entry\ColumnValueProvider\CreatedAt
+        arguments:
+            - "%netgen_content_browser.columns.date_format%"
+        tags:
+            - { name: netgen_content_browser.column_value_provider, identifier: contentful_entry\created_at }
+
+    app.content_browser.template_value_provider.contentful_entry.updated_at:
+        class: AppBundle\ContentBrowser\Item\Entry\ColumnValueProvider\UpdatedAt
+        arguments:
+            - "%netgen_content_browser.columns.date_format%"
+        tags:
+            - { name: netgen_content_browser.column_value_provider, identifier: contentful_entry\updated_at }
+
+    app.content_browser.template_value_provider.contentful_entry.content_type:
+        class: AppBundle\ContentBrowser\Item\Entry\ColumnValueProvider\ContentType
+        tags:
+            - { name: netgen_content_browser.column_value_provider, identifier: contentful_entry\content_type }
+
     app.block_manager.value_converter.contentful_entry:
         class: AppBundle\Layouts\Item\ValueConverter\ContentfulValueConverter
         public: false

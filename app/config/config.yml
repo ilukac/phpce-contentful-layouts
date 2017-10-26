@@ -103,8 +103,18 @@ netgen_content_browser:
                 name:
                     name: columns.name # Will be translated with "ngcb" catalog
                     value_provider: name # Using a built in "name" value provider
+                content_type:
+                    name: columns.contentful_entry.content_type
+                    value_provider: contentful_entry\content_type
+                created_at:
+                    name: columns.contentful_entry.created_at
+                    value_provider: contentful_entry\created_at
+                updated_at:
+                    name: columns.contentful_entry.updated_at
+                    value_provider: contentful_entry\updated_at
             default_columns:
                 - name
+                - content_type
 
 netgen_block_manager:
     pagelayout: 'base.html.twig'
