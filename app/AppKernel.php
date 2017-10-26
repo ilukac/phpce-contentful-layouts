@@ -17,11 +17,22 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Contentful\ContentfulBundle\ContentfulBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new FOS\HttpCacheBundle\FOSHttpCacheBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new Netgen\Bundle\CoreUIBundle\NetgenCoreUIBundle(),
+            new Netgen\Bundle\ContentBrowserBundle\NetgenContentBrowserBundle(),
+            new Netgen\Bundle\ContentBrowserUIBundle\NetgenContentBrowserUIBundle(),
+            new Netgen\Bundle\BlockManagerBundle\NetgenBlockManagerBundle(),
+            new Netgen\Bundle\BlockManagerUIBundle\NetgenBlockManagerUIBundle(),
+            new Netgen\Bundle\BlockManagerAdminBundle\NetgenBlockManagerAdminBundle(),
             new AppBundle\AppBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
+            $bundles[] = new Netgen\Bundle\BlockManagerDebugBundle\NetgenBlockManagerDebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
 
