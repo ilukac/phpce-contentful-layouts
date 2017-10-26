@@ -91,6 +91,21 @@ cmf_routing:
             orm:
                 enabled: true
 
+netgen_content_browser:
+    item_types:
+        contentful_entry:
+            name: item_types.contentful_entry
+            preview:
+                enabled: true
+                template: 'ngcb/contentful_entry.html.twig'
+            columns:
+                # At least a "name" column must exist
+                name:
+                    name: columns.name # Will be translated with "ngcb" catalog
+                    value_provider: name # Using a built in "name" value provider
+            default_columns:
+                - name
+
 netgen_block_manager:
     pagelayout: 'base.html.twig'
     items:
