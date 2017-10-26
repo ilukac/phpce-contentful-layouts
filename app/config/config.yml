@@ -93,3 +93,19 @@ cmf_routing:
 
 netgen_block_manager:
     pagelayout: 'base.html.twig'
+    items:
+        value_types:
+            contentful_entry:
+                name: 'Contentful entry'
+    view:
+        item_view:
+            api:
+                contentful_entry:
+                    template: "ngbm/item/contentful_entry.html.twig"
+                    match:
+                        item\value_type: contentful_entry
+            default:
+                contentful_entry:
+                    template: "ngbm/item/contentful_entry.html.twig"
+                    match:
+                        item\value_type: contentful_entry

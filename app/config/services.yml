@@ -48,3 +48,17 @@ services:
             - "@app.contentful_service"
         tags:
             -  { name: dynamic_router_route_enhancer, priority: 10 }
+
+    app.block_manager.value_converter.contentful_entry:
+        class: AppBundle\Layouts\Item\ValueConverter\ContentfulValueConverter
+        public: false
+        tags:
+            - { name: netgen_block_manager.item.value_converter }
+
+    app.block_manager.value_loader.contentful_entry:
+        class: AppBundle\Layouts\Item\ValueLoader\ContentfulValueLoader
+        public: false
+        arguments:
+            - "@app.contentful_service"
+        tags:
+            - { name: netgen_block_manager.item.value_loader, value_type: contentful_entry }
