@@ -128,3 +128,10 @@ services:
         tags:
             - { name: netgen_block_manager.persistence.doctrine.layout_resolver.query_handler.target_handler, target_type: contentful_space }
 
+    app.contentful_service.twig_function.contentful:
+        class: AppBundle\Twig\Extensions\ContentfulExtension
+        arguments:
+            - "@app.contentful_service"
+        tags:
+            - { name: twig.extension }
+
