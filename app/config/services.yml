@@ -135,3 +135,16 @@ services:
         tags:
             - { name: twig.extension }
 
+    app.condition_type.contentful_content_type_condition:
+        class: AppBundle\Layouts\Resolver\ConditionType\ContentType
+        arguments:
+            - "@app.contentful_service"
+        tags:
+            - { name: netgen_block_manager.layout.resolver.condition_type }
+
+    app.layout_resolver.form.condition_type.mapper.contentful_content_type_condition:
+        class: AppBundle\Layouts\Resolver\ConditionType\FormMapper\ContentType
+        arguments:
+            - "@app.contentful_service"
+        tags:
+            - { name: netgen_block_manager.layout.resolver.form.condition_type.mapper, condition_type: contentful_content_type }

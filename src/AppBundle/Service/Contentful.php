@@ -274,4 +274,19 @@ class Contentful {
         }
         return $spaces;
     }
+
+    public function getSpacesAndContentTypesAsChoices() {
+        $spaces = array();
+        foreach ($this->clients_config as $clientName) {
+            /**
+             * @var \Contentful\Delivery\Client $service
+             */
+            $client = $this->container->get($clientName["service"]);
+            $contentTypes = array();
+            foreach ($client->getContentTypes()->getItems() as $contentType)
+                $contentTypes[$contentType->getName()] = $contentType->getId();
+            $spaces[$client->getSpace()->getName()] = $contentTypes;
+        }
+        return $spaces;
+    }
 }
