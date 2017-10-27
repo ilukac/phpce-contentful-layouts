@@ -44,6 +44,42 @@ class SyncCommand extends ContainerAwareCommand
             foreach ($contentTypes as $contentType) {
                 $fs->dumpFile($spacePath . '/ct-' . $contentType->getId() . '.json', json_encode($contentType));
             }
+
+            /**
+             * @var \Contentful\Delivery\Synchronization\Manager $syncManager
+             */
+            $syncManager = $clientService->getSynchronizationManager();
+
+            if (!$fs->exists($spacePath . '/token')) {
+                $result = $syncManager->startSync();
+            } else {
+                $token = file_get_contents($spacePath . '/token');
+                $result = $syncManager->continueSync($token);
+            }
+
+            $this->buildContentEntries($result->getItems(), $output);
+
+            if (!$result->isDone()) {
+                $token = $result->getToken();
+                $fs->dumpFile($spacePath . '/token', $token);
+            }
+
+        }
+    }
+
+    protected function buildContentEntries($entries, OutputInterface $output) {
+        /**
+         * @var \AppBundle\Service\Contentful $service
+         */
+        $service = $this->getContainer()->get("app.contentful_service");
+
+        foreach ($entries as $remote_entry) {
+            if ($remote_entry instanceof DynamicEntry) {
+                $contentfulEntry = $service->refreshContentfulEntry($remote_entry);
+                $output->writeln('<comment>Remote entry ' . $contentfulEntry->getId() . ' synced.</comment>');
+            } else {
+                $output->writeln('<comment>Unexpected entry ' . get_class($remote_entry) . '. Not synced.</comment>');
+            }
         }
     }
 }

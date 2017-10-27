@@ -251,7 +251,7 @@ class Contentful {
     /*
      ********** Choices for forms ************
      */
-    
+
     public function getClientsAndContentTypesAsChoices() {
         $clientsAndContentTypes = array();
         foreach ($this->clients_config as $clientName => $clientDetails) {
@@ -288,5 +288,25 @@ class Contentful {
             $spaces[$client->getSpace()->getName()] = $contentTypes;
         }
         return $spaces;
+    }
+
+    /*
+     ********** Syncing part ************
+     */
+
+    public function refreshContentfulEntry($remote_entry) {
+        $id = $remote_entry->getSpace()->getId() . "|" . $remote_entry->getId();
+
+        $contentfulEntry = $this->findContentfulEntry($id);
+
+        if ($contentfulEntry instanceof ContentfulEntry) {
+            $contentfulEntry->setJson(json_encode($remote_entry));
+            $this->entity_manager->persist($contentfulEntry);
+            $this->entity_manager->flush();
+
+        } else {
+            $this->buildContentfulEntry($remote_entry, $id);
+        }
+        return $contentfulEntry;
     }
 }
