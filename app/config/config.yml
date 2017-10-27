@@ -150,6 +150,28 @@ netgen_block_manager:
                     template: "ngbm/layout_resolver/condition/value/contentful_content_type.html.twig"
                     match:
                         rule_condition\type: contentful_content_type
+        block_view:
+            default:
+                contentful_entry_field:
+                    template: "ngbm/block/contentful_entry_field.html.twig"
+                    match:
+                        block\definition: contentful_entry_field
+                        block\view_type: contentful_entry_field
+            api:
+                contentful_entry_field:
+                    template: "ngbm/block/api/contentful_entry_field.html.twig"
+                    match:
+                        block\definition: contentful_entry_field
+
+    block_definitions:
+        contentful_entry_field:
+            name: 'Contentful entry field'
+            view_types:
+                contentful_entry_field:
+                    name: 'Contentful entry field'
+    block_type_groups:
+        placeholders:
+            block_types: [twig_block, full_view, contentful_entry_field]
     query_types:
         contentful_search:
             name: 'Contentful search'
