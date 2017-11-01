@@ -9,7 +9,3 @@ query.contentful_search.client: 'Space and Content Type'
 layout_resolver.target.contentful_entry: 'Contentful Entry'
 layout_resolver.target.contentful_space: 'Contentful Space'
 layout_resolver.condition.contentful_content_type: 'Contentful Content Type'
-
-block.notice.empty_contentful_entry_field: 'No field indentifier set'
-block.contentful_entry_field.field_identifier: 'Field identifier'
-block.info.contentful_entry_field: 'Contentful entry field block'
