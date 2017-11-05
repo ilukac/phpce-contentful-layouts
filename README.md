@@ -1,4 +1,5 @@
-layouts4contentful
-==================
+Proof of concept integration of Contentful and Netgen Layouts for PHPCE 2017 workshop.
 
-A Symfony project created on October 24, 2017, 11:02 pm.
+Slides: https://www.slideshare.net/IvoLukac/contentful-with-netgen-layouts-workshop
+
+There are 10 steps tagged to follow the progress of the workshop
